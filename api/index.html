@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B0B0D">
+<meta name="description" content="Study Mods HRRY+ — educational web platforms in one place.">
+<title>Study Mods HRRY+</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0d;--soft:#111114;--surface:#17171a;--surface-hi:#202025;--border:#2a2a30;--accent:#f5a623;--accent-dim:#c9821a;--glow:rgba(245,166,35,.24);--text:#f3f3f1;--muted:#a3a3aa;--faint:#6c6c74;--blue:#58adff;--radius:20px;--top:env(safe-area-inset-top,0px);--bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;-webkit-text-size-adjust:100%}body{min-height:100vh;min-height:100dvh}button,input{font:inherit}button{cursor:pointer;color:inherit}img{display:block;max-width:100%}.hidden{display:none!important}.app-wrapper{max-width:760px;margin:auto;min-height:100vh;min-height:100dvh;padding:var(--top) 0 calc(24px + var(--bottom))}
+.top-bar{display:flex;justify-content:flex-end;padding:16px 18px 0}.profile-btn{width:48px;height:48px;border-radius:50%;padding:3px;background:#15171d;border:1px solid rgba(88,173,255,.5);box-shadow:0 0 0 4px rgba(42,143,255,.06),0 8px 25px #0008}.profile-btn img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:12px 24px 25px}.hero-logo-wrap,.popup-logo,.boot-logo{display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--soft);border:2px solid var(--accent);box-shadow:0 0 24px var(--glow)}.hero-logo-wrap{width:82px;height:82px;border-radius:22px;margin-bottom:17px}.hero-logo-wrap img,.popup-logo img,.boot-logo img{width:100%;height:100%;object-fit:cover}.hero-title{font-family:Fraunces,Georgia,serif;font-size:clamp(27px,7vw,34px);line-height:1.2;margin:0 0 8px;font-weight:800}.accent-word{color:var(--accent)}.hero-tagline{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin:0}
+.search-wrap{padding:0 18px 18px}.search-box{display:flex;align-items:center;gap:11px;background:var(--surface);border:1px solid var(--border);border-radius:17px;padding:14px 16px;box-shadow:0 8px 24px #0002}.search-box svg{width:20px;height:20px;color:var(--faint);flex-shrink:0}.search-input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font-size:14px}.search-input::placeholder{color:var(--faint)}
+.grid-section{padding:3px 18px 10px}.results-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 13px}.results-count{font-size:12px;color:var(--muted);margin:0}.refresh-btn{border:1px solid var(--border);background:var(--surface);border-radius:10px;padding:8px 11px;font-size:11px;font-weight:700;color:var(--accent)}.tile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(min-width:620px){.tile-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}}@media(min-width:900px){.tile-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.tile{min-width:0;width:100%;position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:20px 12px 17px;background:linear-gradient(155deg,#1a1a1e,#131316);border:1px solid var(--border);border-radius:17px;transition:transform .16s,border-color .16s,box-shadow .16s;cursor:pointer}.tile:active{transform:scale(.97);border-color:var(--accent-dim)}.tile:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.tile-icon-wrap{width:68px;height:68px;flex-shrink:0;border-radius:18px;overflow:hidden;border:1px solid rgba(245,166,35,.7);background:#101013;display:flex;align-items:center;justify-content:center;box-shadow:0 0 17px rgba(245,166,35,.10)}.tile-icon-wrap img{width:100%;height:100%;object-fit:cover}.tile-name{font-size:13px;font-weight:700;line-height:1.4;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.tile-category{font-size:10px;color:var(--faint);line-height:1.3;max-width:100%;overflow-wrap:anywhere}.tile-disabled{opacity:.78}.empty-state{grid-column:1/-1;text-align:center;padding:34px 20px;background:var(--surface);border:1px solid var(--border);border-radius:17px;color:var(--muted);font-size:13px;line-height:1.7}.empty-state strong{display:block;color:var(--text);font-size:14px;margin-bottom:5px}.app-footer{text-align:center;padding:28px 18px 8px;font-size:11px;color:var(--faint);line-height:1.9}
+.popup-overlay{position:fixed;inset:0;z-index:500;background:#000b;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:22px;animation:fadeIn .22s}.popup-card{width:100%;max-width:380px;background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:30px 23px 23px;position:relative;text-align:center;box-shadow:0 22px 80px #0009}.popup-close{position:absolute;right:13px;top:13px;width:34px;height:34px;border-radius:50%;background:var(--surface-hi);border:0;font-size:22px;color:var(--muted)}.popup-logo{width:68px;height:68px;border-radius:19px;margin:0 auto 17px}.popup-title{font-family:Fraunces,Georgia,serif;font-size:22px;margin:0 0 9px}.popup-desc{font-size:13px;color:var(--muted);line-height:1.65;margin:0 0 18px}.popup-join-btn,.popup-secondary{display:flex;align-items:center;justify-content:center;width:100%;border-radius:13px;padding:14px;font-size:13px;font-weight:800}.popup-join-btn{border:0;background:linear-gradient(135deg,var(--accent),var(--accent-dim));color:#1a1200}.popup-secondary{margin-top:10px;background:transparent;border:1px solid var(--border);color:var(--text)}
+.profile-sheet{position:fixed;inset:0;z-index:600;background:#000b;backdrop-filter:blur(9px);display:flex;align-items:flex-end;justify-content:center;padding:0 12px}.profile-sheet-card{width:min(520px,100%);background:linear-gradient(145deg,#1b1e25,#101216);border:1px solid #ffffff16;border-radius:27px 27px 0 0;padding:28px 20px calc(24px + var(--bottom));text-align:center;position:relative}.profile-sheet-close{position:absolute;right:14px;top:12px;width:36px;height:36px;border-radius:50%;background:#ffffff0d;border:0;font-size:23px;color:var(--muted)}.profile-sheet-avatar{width:88px;height:88px;border-radius:50%;object-fit:cover;margin:0 auto 12px;border:2px solid var(--blue)}.profile-sheet-card h2{margin:0;font-size:21px}.profile-sheet-card>p{margin:6px 0 19px;color:var(--blue);font-size:12px}.profile-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.profile-info-grid div{background:#ffffff08;border:1px solid #ffffff12;border-radius:14px;padding:13px 7px;min-width:0}.profile-info-grid span{display:block;font-size:10px;color:var(--faint);margin-bottom:5px}.profile-info-grid strong{display:block;font-size:12px;overflow-wrap:anywhere}
+#bootScreen{position:fixed;inset:0;z-index:900;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;transition:opacity .35s}#bootScreen.boot-hide{opacity:0;pointer-events:none}.boot-logo{width:82px;height:82px;border-radius:22px;animation:pulse 1.7s infinite}.boot-logo img{position:absolute;inset:0}.boot-logo{position:relative}#bootScreen h1{font-family:Fraunces,Georgia,serif;font-size:26px;margin:0}#bootMsg{font-size:12px;color:var(--muted);font-weight:600;margin:0}.spinner{width:25px;height:25px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@keyframes pulse{0%,100%{transform:scale(.96);box-shadow:0 0 20px #f5a62322}50%{transform:scale(1.04);box-shadow:0 0 35px #f5a62355}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="bootScreen" aria-live="polite">
+  <div class="boot-logo"><img src="https://i.ibb.co/hRDqcbmg/file-0000000035a48211842ec377eca6f642.png" alt=""></div>
+  <h1>study mods <span class="accent-word">hrry+</span></h1>
+  <div class="spinner"></div><p id="bootMsg">Loading web platforms…</p>
+</div>
+
+<main class="app-wrapper">
+  <div class="top-bar"><button id="telegramProfileBtn" class="profile-btn" aria-label="Open profile"><img id="telegramProfileAvatar" src="https://i.ibb.co/hRDqcbmg/file-0000000035a48211842ec377eca6f642.png" alt="Profile"></button></div>
+  <header class="hero">
+    <div class="hero-logo-wrap"><img src="https://i.ibb.co/hRDqcbmg/file-0000000035a48211842ec377eca6f642.png" alt="Study Mods HRRY+"></div>
+    <h1 class="hero-title">study mods <span class="accent-word">hrry+</span></h1>
+    <p class="hero-tagline">Your study space • Powered by Telegram</p>
+  </header>
+  <div class="search-wrap"><label class="search-box">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <input id="searchInput" class="search-input" type="search" placeholder="Search web platforms..." autocomplete="off" aria-label="Search web platforms">
+  </label></div>
+  <section class="grid-section" aria-label="Web platforms">
+    <div class="results-row"><p class="results-count" id="resultsCount">Loading…</p><button class="refresh-btn" id="refreshBtn" type="button">↻ Refresh</button></div>
+    <div class="tile-grid" id="tileGrid"><div class="empty-state">Loading platforms…</div></div>
+  </section>
+  <footer class="app-footer">© <span id="footerYear"></span> study mods hrry+. All rights reserved.<br>Developed by Krishna</footer>
+</main>
+
+<div id="telegramGate" class="popup-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="popup-card"><button id="gateClose" class="popup-close" aria-label="Close">×</button>
+    <div class="popup-logo"><img src="https://i.ibb.co/hRDqcbmg/file-0000000035a48211842ec377eca6f642.png" alt=""></div>
+    <h2 id="gateTitle" class="popup-title">Join our channel</h2>
+    <p class="popup-desc">Latest batches, updates aur important announcements ke liye hamare official Telegram channel ko visit karein.</p>
+    <button id="joinTelegramBtn" class="popup-join-btn" type="button">Join Channel ↗</button>
+    <button id="continueTelegramBtn" class="popup-secondary" type="button">Continue to App</button>
+  </div>
+</div>
+
+<div id="profileSheet" class="profile-sheet hidden" role="dialog" aria-modal="true" aria-label="Profile information">
+  <div class="profile-sheet-card"><button id="profileSheetClose" class="profile-sheet-close" aria-label="Close">×</button>
+    <img id="profileSheetAvatar" class="profile-sheet-avatar" src="https://i.ibb.co/hRDqcbmg/file-0000000035a48211842ec377eca6f642.png" alt="Brand logo">
+    <h2 id="profileSheetName">Study Mods HRRY+</h2><p id="profileSheetUsername">Web platform directory</p>
+    <div class="profile-info-grid"><div><span>Web platforms</span><strong id="profilePlatformCount">—</strong></div><div><span>Data source</span><strong>External JSON</strong></div></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const BRAND_LOGO = 'https://i.ibb.co/hRDqcbmg/file-0000000035a48211842ec377eca6f642.png';
+const TELEGRAM_CHANNEL_URL = 'https://t.me/hrbseb10thallcorse';
+const $ = id => document.getElementById(id);
+let platforms = [];
+let loadController = null;
+
+function normalizeUrl(value) {
+  try {
+    const url = new URL(String(value || '').trim());
+    if (!['https:', 'http:'].includes(url.protocol)) return '';
+    url.hash = '';
+    url.hostname = url.hostname.toLowerCase();
+    if ((url.protocol === 'https:' && url.port === '443') ||
+        (url.protocol === 'http:' && url.port === '80')) url.port = '';
+    if (url.pathname !== '/') url.pathname = url.pathname.replace(/\/+$/, '');
+    return url.href;
+  } catch { return ''; }
+}
+
+function uniqueWebPlatforms(records) {
+  const seenUrls = new Set();
+  const output = [];
+  for (const item of records) {
+    if (!item || item.type !== 'web') continue;
+    const title = String(item.title || '').trim();
+    if (!title) continue;
+    const link = normalizeUrl(item.link);
+    if (link) {
+      if (seenUrls.has(link)) continue;
+      seenUrls.add(link);
+    }
+    output.push({
+      id: String(item.id || title),
+      title,
+      logo: normalizeUrl(item.logo) || BRAND_LOGO,
+      link,
+      category: String(item.category || 'Other').trim() || 'Other',
+      gate: String(item.gate || ''),
+      type: 'web'
+    });
+  }
+  return output;
+}
+
+function showMessage(title, detail, retry = true) {
+  const grid = $('tileGrid');
+  const card = document.createElement('div');
+  card.className = 'empty-state';
+  const heading = document.createElement('strong');
+  heading.textContent = title;
+  const description = document.createElement('div');
+  description.textContent = detail;
+  card.append(heading, description);
+  if (retry) {
+    const button = document.createElement('button');
+    button.className = 'popup-secondary';
+    button.type = 'button';
+    button.textContent = 'Try again';
+    button.style.maxWidth = '180px';
+    button.style.margin = '16px auto 0';
+    button.addEventListener('click', loadPlatforms);
+    card.appendChild(button);
+  }
+  grid.replaceChildren(card);
+}
+
+async function loadPlatforms() {
+  if (loadController) loadController.abort();
+  loadController = new AbortController();
+  const signal = loadController.signal;
+  $('resultsCount').textContent = 'Loading platforms…';
+  $('tileGrid').innerHTML = '<div class="empty-state">Fetching your web platform list…</div>';
+  $('bootMsg').textContent = 'Loading web platforms…';
+
+  try {
+    const configResponse = await fetch('/api/config', {
+      cache: 'no-store', signal, headers: { 'Accept': 'application/json' }
+    });
+    if (!configResponse.ok) throw new Error('Config API returned HTTP ' + configResponse.status);
+    const config = await configResponse.json();
+    if (!config || typeof config.url !== 'string') {
+      throw new Error(config?.error || 'JSON feed URL is not configured in Vercel.');
+    }
+
+    const feed = new URL(config.url);
+    if (feed.protocol !== 'https:') throw new Error('JSON feed must use HTTPS.');
+
+    const response = await fetch(feed.href, {
+      cache: 'no-store', signal, headers: { 'Accept': 'application/json' }
+    });
+    if (!response.ok) throw new Error('JSON feed returned HTTP ' + response.status);
+    const data = await response.json();
+    if (!Array.isArray(data)) throw new Error('JSON file must contain an array of records.');
+
+    platforms = uniqueWebPlatforms(data);
+    $('profilePlatformCount').textContent = String(platforms.length);
+    renderPlatforms($('searchInput').value);
+  } catch (error) {
+    if (error.name === 'AbortError') return;
+    console.error('Platform feed error:', error);
+    platforms = [];
+    $('profilePlatformCount').textContent = '0';
+    $('resultsCount').textContent = 'Unable to load';
+    showMessage('Could not load platforms', 'Check PLATFORMS_JSON_URL in Vercel, the JSON format, and whether the JSON host permits browser CORS requests.');
+  } finally {
+    hideBoot();
+  }
+}
+
+function renderPlatforms(query = '') {
+  const grid = $('tileGrid');
+  const term = query.trim().toLocaleLowerCase();
+  const results = platforms.filter(p =>
+    p.title.toLocaleLowerCase().includes(term) ||
+    p.category.toLocaleLowerCase().includes(term)
+  );
+  $('resultsCount').textContent =
+    `${results.length} web platform${results.length === 1 ? '' : 's'} found`;
+  const fragment = document.createDocumentFragment();
+
+  if (!results.length) {
+    const empty = document.createElement('div');
+    empty.className = 'empty-state';
+    empty.innerHTML = '<strong>No matching platforms</strong>Try another search term.';
+    fragment.appendChild(empty);
+    grid.replaceChildren(fragment);
+    return;
+  }
+
+  for (const platform of results) {
+    const tile = document.createElement('div');
+    tile.className = 'tile' + (!platform.link ? ' tile-disabled' : '');
+    tile.tabIndex = 0;
+    tile.setAttribute('role', 'link');
+    tile.setAttribute('aria-label', platform.link ? 'Open ' + platform.title : platform.title + ', link not configured');
+
+    const icon = document.createElement('div');
+    icon.className = 'tile-icon-wrap';
+    const img = document.createElement('img');
+    img.src = platform.logo;
+    img.alt = platform.title + ' logo';
+    img.loading = 'lazy';
+    img.onerror = () => {
+      img.onerror = null;
+      img.remove();
+      icon.textContent = '📚';
+      icon.style.fontSize = '28px';
+    };
+    icon.appendChild(img);
+
+    const name = document.createElement('div');
+    name.className = 'tile-name';
+    name.textContent = platform.title;
+    tile.append(icon, name);
+
+    // Category is searchable but deliberately not used to group or hide entries.
+    const openPlatform = () => {
+      if (!platform.link) {
+        alert(platform.gate
+          ? 'This entry has no direct link. The gate "' + platform.gate + '" needs a supported destination configuration.'
+          : 'This platform does not have a valid URL yet.');
+        return;
+      }
+      window.open(platform.link, '_blank', 'noopener,noreferrer');
+    };
+    tile.addEventListener('click', openPlatform);
+    tile.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openPlatform();
+      }
+    });
+    fragment.appendChild(tile);
+  }
+  grid.replaceChildren(fragment);
+}
+
+function hideBoot() {
+  const boot = $('bootScreen');
+  if (!boot || boot.dataset.hiding === '1') return;
+  boot.dataset.hiding = '1';
+  boot.classList.add('boot-hide');
+  setTimeout(() => boot.remove(), 400);
+}
+
+function initProfile() {
+  $('telegramProfileBtn').addEventListener('click', () => $('profileSheet').classList.remove('hidden'));
+  $('profileSheetClose').addEventListener('click', () => $('profileSheet').classList.add('hidden'));
+  $('profileSheet').addEventListener('click', event => {
+    if (event.target === $('profileSheet')) $('profileSheet').classList.add('hidden');
+  });
+}
+
+function initTelegramPopup() {
+  const gate = $('telegramGate');
+  $('joinTelegramBtn').addEventListener('click', () => {
+    window.open(TELEGRAM_CHANNEL_URL, '_blank', 'noopener,noreferrer');
+    gate.classList.add('hidden');
+  });
+  $('continueTelegramBtn').addEventListener('click', () => gate.classList.add('hidden'));
+  $('gateClose').addEventListener('click', () => gate.classList.add('hidden'));
+  try {
+    if (!localStorage.getItem('study_mods_hrry_prompt_seen')) {
+      gate.classList.remove('hidden');
+      localStorage.setItem('study_mods_hrry_prompt_seen', '1');
+    }
+  } catch { /* Storage disabled: popup can still be dismissed. */ }
+}
+
+function startApp() {
+  $('footerYear').textContent = new Date().getFullYear();
+  $('searchInput').addEventListener('input', event => renderPlatforms(event.target.value));
+  $('refreshBtn').addEventListener('click', loadPlatforms);
+  initProfile();
+  initTelegramPopup();
+
+  // Failsafe: the opening animation cannot block the app indefinitely.
+  const failsafe = setTimeout(hideBoot, 3500);
+  loadPlatforms().finally(() => clearTimeout(failsafe));
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', startApp, { once: true });
+} else {
+  startApp();
+}
+</script>
+</body>
+</html>
